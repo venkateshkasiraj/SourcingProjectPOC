@@ -1,0 +1,137 @@
+{
+    "_version": "1.49.0",
+    "sap.app": {
+        "id": "macrosui5",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:fpm",
+            "version": "1.11.0",
+            "toolsId": "ba576e64-83b7-483f-8d60-9ac250ea6588"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/odata/v4/MacrosService/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.119.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "macrosui5.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "name": "SourcingProjectHeaderMain",
+                    "pattern": ":?query:",
+                    "target": "SourcingProjectHeaderMain"
+                },
+                {
+                    "name": "ObjectPage",
+                    "pattern": "/SourcingProjectHeader({ID},{IsActiveEntity}):?query:",
+                    "target": "ObjectPage"
+                }
+            ],
+            "targets": {
+                "SourcingProjectHeaderMain": {
+                    "type": "Component",
+                    "id": "SourcingProjectHeaderMain",
+                    "name": "sap.fe.core.fpm",
+                    "options": {
+                        "settings": {
+                            "viewName": "macrosui5.ext.main.Main",
+                            "contextPath": "/SourcingProjectHeader",
+                            "navigation": {
+								"RootEntity": {
+									"detail": {
+										"route": "ObjectPage"
+									}
+								}
+							}
+                        }
+                    }
+                },
+                "ObjectPage": {
+                    "type": "Component",
+                    "id": "ObjectPage",
+                    "name": "sap.fe.core.fpm",
+                    "options": {
+                        "settings": {
+                            "viewName": "macrosui5.ext.View.ObjectPage",
+                            "contextPath": "/SourcingProjectHeader"
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
+            }
+        }
+    }
+}
