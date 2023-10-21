@@ -1,6 +1,8 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:macros="sap.fe.macros"
     xmlns:html="http://www.w3.org/1999/xhtml" controllerName="macrosui5.ext.main.Main">
     <Page id="Main" title="Main">
-        <content></content>
+        <content>
+        <Button text="Create"  press=".onCreate" />
+        </content>
     </Page>
 </mvc:View>

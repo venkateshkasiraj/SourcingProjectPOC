@@ -3,9 +3,10 @@ service MacrosService {
     @odata.draft.enabled    
     entity SourcingProjectHeader    as projection on db.SourcingProjectHeader{
         *,
-        _NavEventTypes.EventText
+        EventType.EventText
     };    
     entity Items                    as projection on db.Items; 
-    entity EventTypes                as projection on db.EventTypes;
-    entity Templates                 as projection on db.Templates;
+    entity Phases                   as projection on db.Phases; 
+    entity EventTypes               as projection on db.EventTypes;
+    entity Templates                as projection on db.Templates;
 }

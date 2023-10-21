@@ -51,6 +51,7 @@
                 "sap.m": {},
                 "sap.ui.core": {},
                 "sap.ushell": {},
+                "sap.fe.macros":{},
                 "sap.fe.templates": {}
             }
         },
@@ -92,7 +93,7 @@
                 },
                 {
                     "name": "ObjectPage",
-                    "pattern": "/SourcingProjectHeader({ID},{IsActiveEntity}):?query:",
+                    "pattern": "SourcingProjectHeader(ID={ID},IsActiveEntity={IsActiveEntity}):?query:",
                     "target": "ObjectPage"
                 }
             ],
@@ -106,7 +107,7 @@
                             "viewName": "macrosui5.ext.main.Main",
                             "contextPath": "/SourcingProjectHeader",
                             "navigation": {
-								"RootEntity": {
+								"SourcingProjectHeader": {
 									"detail": {
 										"route": "ObjectPage"
 									}

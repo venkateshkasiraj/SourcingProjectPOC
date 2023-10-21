@@ -1,2 +1,2 @@
 
-using from './macrosui5/annotations';
+using from './macrosui5/uiAnnotations/ServiceAnnotation';

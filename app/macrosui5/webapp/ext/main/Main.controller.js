@@ -7,8 +7,13 @@ sap.ui.define(
 
         return PageController.extend('macrosui5.ext.main.Main', {
             
-            onInit: function () {          
-                this.getAppComponent().getRouter("SourcingProjectHeaderMain").attachRoutePatternMatched(this._onRouteMatched, this);
+            onInit: function () {   
+                PageController.prototype.onInit.apply(this);       
+                setTimeout(() => { this.onCreate();                     
+                }, 1);
+                
+
+                //   this.getAppComponent().getRouter("SourcingProjectHeaderMain").attachRoutePatternMatched(this._onRouteMatched, this);
               },
 
               _onRouteMatched: function (oEvent) {
@@ -38,7 +43,7 @@ sap.ui.define(
               
               //                                  this.getView().setBindingContext(oContext)
                  
-            }
+            },
             
             
             
@@ -57,10 +62,29 @@ sap.ui.define(
              * (NOT before the first rendering! onInit() is used for that one!).
              * @memberOf macrosui5.ext.main.Main
              */
-            //  onBeforeRendering: function() {
-            //
-            //  },
-
+              onBeforeRendering: function() {
+                
+              },
+ 
+              onCreate : function() {
+                var oModel = this.getView().getModel();
+                var oListBinding = oModel.bindList("/SourcingProjectHeader");
+                
+                var oContext = oListBinding.create({Name: 'Project Name Dummy',
+                                                FullProject: true});
+                                                
+                debugger;
+                                                                // Do not forget to mention default values on screen for radio button/check box. otherwise it will be stored as null
+                 var that = this;
+                 oContext.created().then(function() {
+                                         that.getView().setBindingContext(oContext);
+                                         var sID = oContext.getValue().ID;
+                                         var sIsActiveEntity = oContext.getValue().IsActiveEntity;
+                                         //oContext.setKeepAlive(true); 
+                                         that.getExtensionAPI().routing.navigateToRoute("ObjectPage", {  ID: sID, 
+                                                                                                         IsActiveEntity: sIsActiveEntity });
+                                         }); 
+              },
             /**
              * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
              * This hook is the same one that SAPUI5 controls get after being rendered.
