@@ -86,47 +86,30 @@
             "css": []
         },
         "routing": {
-            "routes": [
-                {
-                    "name": "SourcingProjectHeaderMain",
-                    "pattern": ":?query:",
-                    "target": "SourcingProjectHeaderMain"
-                },
+            "routes": [          
                 {
                     "name": "ObjectPage",
-                    "pattern": "SourcingProjectHeader(ID={ID},IsActiveEntity={IsActiveEntity}):?query:",
+                    "pattern": "SourcingProjectHeader({key}):?query:",
                     "target": "ObjectPage"
                 }
             ],
             "targets": {
-                "SourcingProjectHeaderMain": {
-                    "type": "Component",
-                    "id": "SourcingProjectHeaderMain",
-                    "name": "sap.fe.core.fpm",
-                    "options": {
-                        "settings": {
-                            "viewName": "macrosui5.ext.main.Main",
-                            "contextPath": "/SourcingProjectHeader",
-                            "navigation": {
-								"SourcingProjectHeader": {
-									"detail": {
-										"route": "ObjectPage"
-									}
-								}
-							}
-                        }
-                    }
-                },
                 "ObjectPage": {
                     "type": "Component",
                     "id": "ObjectPage",
                     "name": "sap.fe.core.fpm",
-                    "options": {
-                        "settings": {
-                            "viewName": "macrosui5.ext.View.ObjectPage",
-                            "contextPath": "/SourcingProjectHeader"                            
-                        }
-                    }
+                    "options": {                             
+                        "settings": {   
+                            "viewName": "macrosui5.ext.View.ObjectPage",                     
+                            "contextPath": "/SourcingProjectHeader",         
+                            "content": {                     
+                                "header": {                  
+                                    "visible": false,        
+                                    "anchorBarVisible": false
+                                }                            
+                            }                                
+                        }                                    
+                    }           
                 }
             }
         },

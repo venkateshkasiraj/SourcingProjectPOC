@@ -45,7 +45,8 @@ annotate MacrosService.SourcingProjectHeader with {
                                                     ]
                                     }
                                 );
-
+                                EventText @( Core.Computed: true,  
+                                             Common.Label: 'Event Text');  
 
 };
 
