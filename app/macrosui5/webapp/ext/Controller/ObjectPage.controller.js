@@ -1,31 +1,59 @@
 sap.ui.define(
     [
         'sap/fe/core/PageController',
-        "sap/fe/core/controllerextensions/EditFlow"
+        "sap/fe/core/controllerextensions/EditFlow",
+        "sap/ui/model/json/JSONModel",
+        "sap/m/MessageToast"
     ],
-    function(PageController, EditFlow) {
+    function(PageController, EditFlow, JSONModel, MessageToast) {
         'use strict';
 
         return PageController.extend('macrosui5.ext.Controller.ObjectPage', {
             
             onInit: function () { 
                 PageController.prototype.onInit.apply(this);
-                // this.getAppComponent().getRouter("ObjectPage").attachRoutePatternMatched(this._onRouteMatched, this)
+                //
+                 this.getAppComponent().getRouter("ObjectPage").attachRoutePatternMatched(this._onRouteMatched, this)
              },
 
-             saveDocument: function () {
+             _onRouteMatched: function (oEvent) {
+                var oModel = this.getView().getModel();
+                var oMetaModelLoaded = oModel.getMetaModel().requestObject("/SourcingProjectHeader"); 
+                oMetaModelLoaded.then(this._onMetadataLoaded.bind(this));
+            },
+
+            _onMetadataLoaded: function () {  
+                this.getView().getModel("ui").setProperty("/isEditable", true); 
+            },
+
+            onSelectProjectType: function (oEvent) {
+                var selectedIndex = oEvent.getParameter("selectedIndex"); // will be 0 for "Single Event", 1 for "Full project"
+                var bValue = selectedIndex === 1;
+                this.byId("_IDGenPanel1").getBindingContext().setProperty("FullProject", bValue);                 
+           },
+           onPressAction: function (oEvent) {
+            MessageToast.show("Custom Action Pressed");
+           },
+           
+           onPressInColumn: function (oEvent) {
+            MessageToast.show("Button Pressed");
+           },
+            saveDocument: function () {
                 var that = this;
                 this.editFlow.saveDocument(this.getView().getBindingContext()).then(function(){
                     that.getView().getModel("ui").setProperty("/isEditable", false); 
                 })
             },
+
             cancelDocument: async function (oEvent) {
                 var oDraftContext = this.getView().getBindingContext(); // get the context of the draft ID
 
                 if (oDraftContext) {
                   oDraftContext.delete("$auto"); // send DELETE request to the draft's endpoint;
                 }
-
+                window.history.go(-1); 
+                
+                // as per guideline not working
                 // var that = this;
                 // this.editFlow.cancelDocument(this.getView().getBindingContext(), {
                 //     control: this.byId("cancelButton")
@@ -36,8 +64,8 @@ sap.ui.define(
 
                 //await this.editFlow.cancelDocument(this.getView().getBindingContext(), { cancelButton: oEvent.getSource() });
 
-
-                //     var oObjectPage = this.byId("CreateSourcingProject"),
+               // as per wiki not working 
+            //     var oObjectPage = this.byId("CreateSourcingProject"),
             //     oDraftContext = this.getView().getBindingContext();
          
             // function gotoActiveContext(oActiveContext) {
@@ -54,34 +82,7 @@ sap.ui.define(
             //             {$$inheritExpandSelect : true})
             //         .execute("$auto", false, null, /*bReplaceWithRVC*/false).then(gotoActiveContext);
             // }
-            },
-             _onRouteMatched: function (oEvent) {
-                // this.sID = oEvent.getParameter("arguments").ID;
-                // this.sIsActiveEntity= oEvent.getParameter("arguments").IsActiveEntity;
-                // this.sPath = '/SourcingProjectHeader(ID={sID},IsActiveEntity={sIsActiveEntity})';
-                // this.sPath = this.sPath.replace("{sID}", this.sID);
-                // this.sPath = this.sPath.replace("{sIsActiveEntity}", this.sIsActiveEntity);
-
-                // var oModel = this.getView().getModel();
-                // var oMetaModelLoaded = oModel.getMetaModel().requestObject("/SourcingProjectHeader"); 
-                // oMetaModelLoaded.then(this._onMetadataLoaded.bind(this));
-
-                
-                              
-                // var oModel = this.getView().getModel();
- 
-                // var  oContext = this.getView().getModel().createBindingContext(this.sPath) 
-                // // this.getView().getModel().getKeepAliveContext(this.sPath, false,
-                // //         {$$patchWithoutSideEffects : true});      
-                // this.getView().setBindingContext(oContext); 
-            },
-            _onMetadataLoaded: function () {  
-  
-                //  this.getView().bindElement({
-                //      path: this.sPath
-                //  }); 
             }
-
         });
     }
 );

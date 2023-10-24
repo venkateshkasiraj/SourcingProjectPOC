@@ -9,11 +9,11 @@ sap.ui.define(
             
             onInit: function () {   
                 PageController.prototype.onInit.apply(this);       
-                setTimeout(() => { this.onCreate();                     
-                }, 1);
+                // setTimeout(() => { this.onCreate();                     
+                // }, 1);
                 
 
-                //   this.getAppComponent().getRouter("SourcingProjectHeaderMain").attachRoutePatternMatched(this._onRouteMatched, this);
+                  this.getAppComponent().getRouter("SourcingProjectHeaderMain").attachRoutePatternMatched(this._onRouteMatched, this);
               },
 
               _onRouteMatched: function (oEvent) {
@@ -23,25 +23,47 @@ sap.ui.define(
 
             },
             _onMetadataLoaded: function () {   
-                var oModel = this.getView().getModel();
-                var oListBinding = oModel.bindList("/SourcingProjectHeader");
-                var oContext = oListBinding.create({Name: 'Project Name Dummy',
-                                                FullProject: true});
-                debugger;
-               
-                                                                // Do not forget to mention default values on screen for radio button/check box. otherwise it will be stored as null
-                 var that = this;
-                 oContext.created().then(function() {
-                                         that.getView().setBindingContext(oContext);
-                                         var sID = oContext.getValue().ID;
-                                         var sIsActiveEntity = oContext.getValue().IsActiveEntity;
+                if(this._createDone)
+                {}
+                else{
+                    var that = this;
+                    this._createDone = true;
+                    const listBinding = this.getAppComponent().getModel().bindList("/SourcingProjectHeader");
+                    this.editFlow.createDocument(listBinding, {
+                        creationMode: "NewPage"
+                    });
+                    // var oContext = listBinding.create({ });
+                    // var that = this;    
+                    // oContext.created().then(function() {
+                    //                         that.getView().setBindingContext(oContext);
+                    //                         var sID = oContext.getValue().ID;
+                    //                         var sIsActiveEntity = oContext.getValue().IsActiveEntity;
 
-                                         that.getExtensionAPI().routing.navigateToRoute("ObjectPage", {  ID: sID, 
-                                                                                                         IsActiveEntity: sIsActiveEntity });
-                                         }); 
+                    //                         that.getExtensionAPI().routing.navigateToRoute("ObjectPage", {  ID: sID, 
+                    //                                                                                         IsActiveEntity: sIsActiveEntity });
+                    //                         }); 
+                };
+
+
+                // var oModel = this.getView().getModel();
+                // var oListBinding = oModel.bindList("/SourcingProjectHeader");
+                // var oContext = oListBinding.create({Name: 'Project Name Dummy',
+                //                                 FullProject: true});
+                // debugger;
+               
+                //                                                 // Do not forget to mention default values on screen for radio button/check box. otherwise it will be stored as null
+                //  var that = this;
+                //  oContext.created().then(function() {
+                //                          that.getView().setBindingContext(oContext);
+                //                          var sID = oContext.getValue().ID;
+                //                          var sIsActiveEntity = oContext.getValue().IsActiveEntity;
+
+                //                          that.getExtensionAPI().routing.navigateToRoute("ObjectPage", {  ID: sID, 
+                //                                                                                          IsActiveEntity: sIsActiveEntity });
+                //                          }); 
               
-              
-              //                                  this.getView().setBindingContext(oContext)
+                
+                
                  
             },
             

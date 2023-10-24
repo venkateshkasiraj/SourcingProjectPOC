@@ -11,15 +11,35 @@ annotate MacrosService.Items with @(UI: {LineItem: [
 
 annotate MacrosService.EventTypes with {
                                             ID @(  Common.Label           : 'Event Type',
-                                                   Core.Immutable: true,
-                                                   Core.Computed: true,  
                                                    Common.Text : EventText,
                                                    Common.TextArrangement: #TextFirst
                                                    );
-                                            EventText @(    Core.Immutable: true,
-                                                            Common.Label  : 'Event Name' ); 
+                                            EventText @( Common.Label  : 'Event Name' ); 
 };
 
 annotate MacrosService.SourcingProjectHeader with@Capabilities.NavigationRestrictions.RestrictedProperties : [
-    { NavigationProperty: 'Item', ReadRestrictions: { Readable: true }, InsertRestrictions :{ Insertable : true } }   
+    { NavigationProperty: 'Item', ReadRestrictions: { Readable: true }, InsertRestrictions :{ Insertable : true } },  
+    { NavigationProperty: 'Phase', ReadRestrictions: { Readable: true }, InsertRestrictions :{ Insertable : true } }   
 ];
+
+annotate MacrosService.Phases {
+    nodeID @sap.hierarchy.node.for;
+    hierarchyLevel @sap.hierarchy.level.for;
+    parentNodeID @sap.hierarchy.parent.node.for;
+    drillState @sap.hierarchy.drill.state.for;    
+};
+
+annotate MacrosService.Phases with @(
+    UI: {
+        LineItem: [
+            { $Type: 'UI.DataField', Value: Name, Label: 'Name' },
+            { $Type: 'UI.DataField', Value: Type, Label: 'Type' },
+            { $Type: 'UI.DataField', Value: Status, Label: 'Status' }
+        ],
+        HeaderInfo: {
+            $Type: 'UI.HeaderInfoType',
+            TypeName: 'Phase',
+            TypeNamePlural: 'Phases'
+        }
+    }
+);

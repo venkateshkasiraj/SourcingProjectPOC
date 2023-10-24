@@ -1,48 +1,223 @@
 <mvc:View
-	xmlns:core="sap.ui.core"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:macros="sap.fe.macros"
-	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="macrosui5.ext.Controller.ObjectPage"
-    id="CreateSourcingProject">
-	<Page id="_IDGenPage1" title="{i18n>appTitle}">
-		<headerContent>
-			<Button id="createDocument" text="Create" press=".saveDocument" type="Emphasized"/>
-			<Button id="cancelButton" text="Cancel" press=".cancelDocument"/>
-		</headerContent>
-		<Panel id="_IDGenPanel1" expandable="false" headerText="{i18n>NameAndType}" width="auto" class="sapUiResponsiveMargin">
-			<content>
-				<Label id="_IDGenLabel1" text="Name" labelFor="Name"/>
-				<Input id="_IDGenInput2" value="{Name}" placeholder="Enter project Name"/>
-				<Text id="_IDGenText4" text=" "/>
-				<Label id="_IDGenLabel2" text="Description" labelFor="Description"/>
-				<TextArea id="_IDGenInput3" value="{Description}" growing="true" width="100%"/>
-				<Text id="_IDGenText5" text=" "/>
-				<VBox id="_IDGenVBox1">
-					<Label id="_IDGenLabel3" text="{i18n>projectType}" labelFor="ProjectType"/>
-					<HBox id="_IDGenHBox1" class="sapUiTinyMarginTopBottom">
-						<RadioButtonGroup id="ProjectType" columns="2" select=".onSelectProjectType">
-							<RadioButton id="_IDGenRadioButton1" text="{i18n>projecTypeSingle}"/>
-							<RadioButton id="_IDGenRadioButton2" text="{i18n>projecTypeFull}" selected="true"/>
-						</RadioButtonGroup>
-					</HBox>
-				</VBox>
-				<FlexBox id="_IDGenFlexBox1" alignItems="Start" direction="Column">
-					<Label id="_IDGenLabel4" text="Event Type"/>
-					<macros:Field metaPath="EventType_ID" readOnly="false" id="VHProp" class="sapUiMediumMarginBottom"/>
-				</FlexBox>
-				 <Text id="_IDGenText2" text=" "/>
-				<FlexBox id="_IDGenFlexBox2" alignItems="Start" direction="Column">
-					<Label id="_IDGenLabel5" text="Template"/>
-					<macros:Field metaPath="Template_ID" readOnly="false" id="VHProp2" class="sapUiMediumMarginBottom"/>
-				</FlexBox>
-				<Text id="_IDGenText3" text=" "/>
-				<Panel id="_IDGenPanel2" headerText="{i18n>tableCreationMode}">
-				<macros:Table metaPath="Item/@com.sap.vocabularies.UI.v1.LineItem" id="ItemsTable" selectionMode="None" enableExport="true" creationMode="InlineCreationRows" personalization="true">
-                </macros:Table>
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:tree="sap.ui.table"
+    xmlns:macros="sap.fe.macros"
+	xmlns:macrosTable="sap.fe.macros.table"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    controllerName="macrosui5.ext.Controller.ObjectPage"
+    id="CreateSourcingProject"
+>
+    <Page
+        id="_IDGenPage1"
+        title="{i18n>appTitle}"
+    >
+        <headerContent>
+            <Button
+                id="createDocument"
+                text="Create"
+                press=".saveDocument"
+                type="Emphasized"
+            />
+            <Button
+                id="cancelButton"
+                text="Cancel"
+                press=".cancelDocument"
+            />
+        </headerContent>
+        <Panel
+            id="_IDGenPanel1"
+            expandable="false"
+            headerText="{i18n>NameAndType}"
+            width="auto"
+            class="sapUiResponsiveMargin"
+        >
+            <content>
+                <Label
+                    id="_IDGenLabel1"
+                    text="Name"
+                    labelFor="Name"
+                />
+                <Input
+                    id="_IDGenInput2"
+                    value="{Name}"
+                    placeholder="Enter project Name"
+                />
+                <Text
+                    id="_IDGenText4"
+                    text=" "
+                />
+                <Label
+                    id="_IDGenLabel2"
+                    text="Description"
+                    labelFor="Description"
+                />
+                <TextArea
+                    id="_IDGenInput3"
+                    value="{Description}"
+                    growing="true"
+                    width="100%"
+                />
+                <Text
+                    id="_IDGenText5"
+                    text=" "
+                />
+                <VBox id="_IDGenVBox1">
+                    <Label
+                        id="_IDGenLabel3"
+                        text="{i18n>projectType}"
+                        labelFor="ProjectType"
+                    />
+                    <HBox
+                        id="_IDGenHBox1"
+                        class="sapUiTinyMarginTopBottom"
+                    >
+                        <RadioButtonGroup
+                            id="ProjectType"
+                            columns="2"
+                            select=".onSelectProjectType"
+                        >
+                            <RadioButton
+                                id="_IDGenRadioButton1"
+                                text="{i18n>projecTypeSingle}"
+                            />
+                            <RadioButton
+                                id="_IDGenRadioButton2"
+                                text="{i18n>projecTypeFull}"
+                                selected="true"
+                            />
+                        </RadioButtonGroup>
+                    </HBox>
+                </VBox>
+                <FlexBox
+                    id="_IDGenFlexBox1"
+                    alignItems="Start"
+                    direction="Column"
+                >
+                    <Label
+                        id="_IDGenLabel4"
+                        text="Event Type"
+                    />
+                    <macros:Field
+                        metaPath="EventType_ID"
+                        readOnly="false"
+                        id="VHProp"
+                        class="sapUiMediumMarginBottom"
+                    />
+                </FlexBox>
+                <Text
+                    id="_IDGenText2"
+                    text=" "
+                />
+                <FlexBox
+                    id="_IDGenFlexBox2"
+                    alignItems="Start"
+                    direction="Column"
+                >
+                    <Label
+                        id="_IDGenLabel5"
+                        text="Template"
+                    />
+                    <macros:Field
+                        metaPath="Template_ID"
+                        readOnly="false"
+                        id="VHProp2"
+                        class="sapUiMediumMarginBottom"
+                    />
+                </FlexBox>
+                <Text
+                    id="_IDGenText3"
+                    text=" "
+                />
+                <!-- <Panel
+                    id="_IDGenPanel2"
+                    headerText="{i18n>tableCreationMode}"
+                >
+                    <macros:Table
+                        metaPath="Item/@com.sap.vocabularies.UI.v1.LineItem"
+                        readOnly="false"
+                        id="ItemsTable"
+                        selectionMode="None"
+                        enableExport="true"
+                        creationMode="InlineCreationRows"
+                        personalization="true"
+                    />
+                </Panel> -->
+
+                <Text
+                    id="_IDGenText6"
+                    text=" "
+                />
+				<Panel id="_IDGenPanel3" headerText="{i18n>tableCreationMode}">
+					<macros:Table metaPath="Item/@com.sap.vocabularies.UI.v1.LineItem" readOnly="false" id="LineItemTablePageCustomColumns">
+					
+						<macros:actions>
+							<macrosTable:Action
+							    id="_IDGenAction1"
+								key="customAction"
+								text="My Custom Action"
+								press=".onPressAction"
+								placement="After"
+								anchor="DataFieldForAction::Service.toggleBoolean"
+								requiresSelection="true"
+							/>
+						</macros:actions>
+						<macros:columns>
+							<macrosTable:Column id="_IDGenColumn3" header="Custom Action Column" importance="Low" key="ThirdColumnKey">
+								<Button id="_IDGenButton1" press=".onPressInColumn" text="I'm a button" />
+							</macrosTable:Column>
+						</macros:columns>
+					</macros:Table>
 				</Panel>
-			</content>
-		</Panel>
-	</Page>
+
+
+
+
+
+
+                <!-- <Panel
+                    id="_IDGenPanel3"
+                    headerText="{i18n>phases}"
+                > -->
+                    <!-- <macros:Table type="TreeTable" 
+							   metaPath="Phase/@com.sap.vocabularies.UI.v1.LineItem" 
+				               readOnly="false" 
+							   id="PhasesTable" 
+							   selectionMode="None" 
+							   enableExport="true" 
+							   creationMode="InlineCreationRows" 
+							   personalization="true"> 
+				</macros:Table>  -->
+                    <!-- <smartTable:SmartTable
+                        id="__smartTable"
+                        entitySet="Phases"
+                        header="{i18n>phases}"
+                        showRowCount="true"
+                        tableType="TreeTable"
+                        showFullScreenButton="false"
+                        useVariantManagement="false"
+                        enableAutoBinding="true"
+                    >
+                        <smartTable:customToolbar>
+                            <OverflowToolbar
+                                id="_IDGenOverflowToolbar1"
+                                design="Transparent"
+                            >
+                                <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                                <Button
+                                    id="_IDGenButton1"
+                                    type="Transparent"
+                                    press="onAddTreeBtnPress"
+                                    icon="sap-icon://add"
+                                    enabled="true"
+                                />
+                            </OverflowToolbar>
+                        </smartTable:customToolbar>
+                    </smartTable:SmartTable>
+                </Panel> -->
+            </content>
+        </Panel>
+    </Page>
 </mvc:View>

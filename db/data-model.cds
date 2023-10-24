@@ -20,11 +20,14 @@ entity Items : cuid, managed {
 };
 
 entity Phases : cuid {
-  Name : String(30);
-  Type : String(30);
-  Status : String(10);
-  Parent : Association to Phases on Parent.ID = $self.ID;
-  SrcPrjHdr : Association to one SourcingProjectHeader; 
+        nodeID: Integer;
+        hierarchyLevel: Integer;
+        parentNodeID: Integer;
+        drillState: String;
+        Name : String(30);
+        Type : String(30);
+        Status : String(10);
+        SrcPrjHdr : Association to one SourcingProjectHeader; 
 }
 
  @Capabilities: { Readable:true, Insertable:true, Updatable:true, Deletable:true }

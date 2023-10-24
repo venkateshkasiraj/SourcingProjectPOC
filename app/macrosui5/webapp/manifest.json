@@ -52,7 +52,8 @@
                 "sap.ui.core": {},
                 "sap.ushell": {},
                 "sap.fe.macros":{},
-                "sap.fe.templates": {}
+                "sap.fe.templates": {},
+                "sap.ui.comp":{}
             }
         },
         "contentDensities": {
@@ -123,7 +124,7 @@
                     "options": {
                         "settings": {
                             "viewName": "macrosui5.ext.View.ObjectPage",
-                            "contextPath": "/SourcingProjectHeader"
+                            "contextPath": "/SourcingProjectHeader"                            
                         }
                     }
                 }
@@ -134,5 +135,10 @@
                 "sap.ui.controllerExtensions": {}
             }
         }
-    }
+    },
+    "sap.fe": {
+        "app": {
+            "singleDraftForCreate": true
+        }
+      }
 }
