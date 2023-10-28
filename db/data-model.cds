@@ -1,5 +1,5 @@
 namespace sap.capire.macros;
-using { cuid, Language, managed } from '@sap/cds/common';
+using { cuid, Language, Currency, managed } from '@sap/cds/common';
 
 entity EventTypes {
    key ID        : String(4);
@@ -36,16 +36,26 @@ entity SourcingProjectHeader : cuid, managed {
             Description       : String;
             FullProject       : Boolean;
             TestProject       : Boolean;
-            PlannedState      : Boolean;
+            PlannedState      : Boolean;            
             EventType_ID      : String(4);
             PredecssorOBjID   : String(15); 	        
 	        Origin            : String(30); 	 
             Owner             : String(60);
             Language          : Language;
+            Commodities       : String(60);
+            Regions           : String(60);
+            Departments       : String(60);
+            BaselineSpendAmt  : Decimal(15,2); 
+            BaselineSpend     : Currency;
+            Factory           : String(60);
+            Color             : String(60);
+            TransactionDate   : Date;             
+            ExternalSystem    : String(80);
             Template_ID       : String(15);
             Template          : Association to one Templates  on Template.ID = Template_ID and 
-                                                             Template.EventType_ID = EventType_ID; 
+                                                             Template.EventType_ID = EventType_ID;                                                                     
             Item              : Composition of many Items on Item.Parent = $self;
+
             Phase             : Composition of many Phases on Phase.SrcPrjHdr = $self;
             EventType         : Association to one EventTypes
                                             on EventType.ID = EventType_ID;  
