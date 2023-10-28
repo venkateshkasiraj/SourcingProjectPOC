@@ -6,11 +6,11 @@ sap.ui.define(
         return Component.extend("macrosui5.Component", {
             metadata: {
                 manifest: "json"
-            },
-            getStartupParameters: function() {                         
-                return Promise.resolve({                               
-                    preferredMode: ["create"]                          
-                });                                                    
+             },
+             getStartupParameters: function() {                         
+                 return Promise.resolve({                               
+                     preferredMode: ["create"]                          
+                 });                                                    
             }
         });
     }

@@ -24,6 +24,13 @@ sap.ui.define(
 
             _onMetadataLoaded: function () {  
                 this.getView().getModel("ui").setProperty("/isEditable", true); 
+                if(!this._createDone){ 
+                                        this._createDone = true;
+                                        const listBinding = this.getAppComponent().getModel().bindList("/SourcingProjectHeader");
+                                        this.editFlow.createDocument(listBinding, {
+                                            creationMode: "NewPage"
+                                        });
+                                    };
             },
 
             onSelectProjectType: function (oEvent) {
@@ -51,6 +58,7 @@ sap.ui.define(
                 if (oDraftContext) {
                   oDraftContext.delete("$auto"); // send DELETE request to the draft's endpoint;
                 }
+                this._createDone = false;
                 window.history.go(-1); 
                 
                 // as per guideline not working
