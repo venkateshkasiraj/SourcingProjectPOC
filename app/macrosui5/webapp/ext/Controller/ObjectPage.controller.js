@@ -23,6 +23,7 @@ sap.ui.define(
             },
 
             _onMetadataLoaded: function () {  
+                debugger;
                 this.getView().getModel("ui").setProperty("/isEditable", true); 
                 if(!this._createDone){ 
                                         this._createDone = true;
@@ -31,6 +32,13 @@ sap.ui.define(
                                             creationMode: "NewPage"
                                         });
                                     };
+                var oControlsModel = new JSONModel();
+                oControlsModel.loadData("./model/controls.json");
+                oControlsModel.attachRequestCompleted(function() {
+                    var oControlData = oControlsModel.getData();
+                    debugger;
+                    // Access the data from the control.json file
+                  });
             },
 
             onSelectProjectType: function (oEvent) {
@@ -50,6 +58,10 @@ sap.ui.define(
                 this.editFlow.saveDocument(this.getView().getBindingContext()).then(function(){
                     that.getView().getModel("ui").setProperty("/isEditable", false); 
                 })
+            },
+            
+            onBeforeRendering: function() {
+            debugger;
             },
 
             cancelDocument: async function (oEvent) {
@@ -91,6 +103,7 @@ sap.ui.define(
             //         .execute("$auto", false, null, /*bReplaceWithRVC*/false).then(gotoActiveContext);
             // }
             }
+            
         });
     }
 );
