@@ -22,6 +22,8 @@ annotate MacrosService.SourcingProjectHeader with@Capabilities.NavigationRestric
     { NavigationProperty: 'Phase', ReadRestrictions: { Readable: true }, InsertRestrictions :{ Insertable : true } }   
 ];
 
+
+
 annotate MacrosService.Phases {
     nodeID @sap.hierarchy.node.for;
     hierarchyLevel @sap.hierarchy.level.for;
@@ -42,4 +44,30 @@ annotate MacrosService.Phases with @(
             TypeNamePlural: 'Phases'
         }
     }
+
+    
 );
+
+ annotate MacrosService.SourcingProjectHeader with @(
+    UI: {
+        FieldGroup #nametype : {
+            Data : [
+                { Label: 'Name', Value : Name},
+                { Label : 'Description', Value : Description}, 
+                { Label : 'Full Project', Value : FullProject},
+                { Label : 'Event Type', Value: EventType_ID},                
+            ],
+        },                        
+        Facets  : [
+            {
+                Label : 'Name and type',
+                Target : '@UI.FieldGroup#nametype',
+            }
+        ]
+    }
+);
+
+annotate MacrosService.SourcingProjectHeader with{
+ @Common.FieldControl: name_fc
+ Name;
+}

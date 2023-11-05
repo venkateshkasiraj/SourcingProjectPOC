@@ -32,12 +32,12 @@ entity Phases : cuid {
 
  @Capabilities: { Readable:true, Insertable:true, Updatable:true, Deletable:true }
 entity SourcingProjectHeader : cuid, managed {
-            Name              : String(87) ;            
+            Name              : String(87) ;                        
             Description       : String;
             FullProject       : Boolean;
             TestProject       : Boolean;
-            PlannedState      : Boolean;            
-            EventType_ID      : String(4);
+            PlannedState      : Boolean;                        
+            EventType_ID      : String(4) ;
             PredecssorOBjID   : String(15); 	        
 	        Origin            : String(30); 	 
             Owner             : String(60);

@@ -10,3 +10,6 @@ service MacrosService {
     entity EventTypes               as projection on db.EventTypes;
     entity Templates                as projection on db.Templates;
 }
+extend projection MacrosService.SourcingProjectHeader with { 
+ virtual cast('#ReadOnly' as String(20)) as name_fc
+}

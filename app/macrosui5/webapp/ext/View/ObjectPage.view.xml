@@ -34,12 +34,12 @@
             width="auto"
             class="sapUiResponsiveMargin">
             <m:content>
-                <m:Label
+                <!-- <m:Label
                     id="_IDGenLabel1"
                     text="Name"
                     labelFor="Name"
-                />
-
+                /> -->
+	         <macros:Form layoutData="ResponsiveGridLayout" metaPath="@com.sap.vocabularies.UI.v1.FieldGroup#nametype" id="proj1" title="Name and type"/>
             </m:content>
         </m:Panel>
 
