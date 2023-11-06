@@ -59,4 +59,6 @@ entity SourcingProjectHeader : cuid, managed {
             Phase             : Composition of many Phases on Phase.SrcPrjHdr = $self;
             EventType         : Association to one EventTypes
                                             on EventType.ID = EventType_ID;  
+            
+            virtual name_fc : String(20)  default '#ReadOnly';                                            
 };

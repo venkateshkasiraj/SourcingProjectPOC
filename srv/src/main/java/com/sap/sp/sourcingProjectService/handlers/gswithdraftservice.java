@@ -1,5 +1,7 @@
 package com.sap.sp.sourcingProjectService.handlers;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.expression.spel.ast.BooleanLiteral;
@@ -17,7 +19,15 @@ public class gswithdraftservice implements EventHandler {
     private Map<Object, Map<String, Object>> SourcingProjectHeader = new HashMap<>();
     @On(event = CqnService.EVENT_READ, entity = "MacrosService.SourcingProjectHeader")
     public void onRead(CdsReadEventContext context) {
-     //   context.getCqn().entries().forEach(e -> products.put(e.get("ID"), e));
+    List<Map<String, Object>> result = new ArrayList<>();
+    System.out.println( context.toString());
+    for (Map<String, Object> entry : SourcingProjectHeader.values()) {
+        Map<String, Object> modifiedEntry = new HashMap<>(entry);
+        modifiedEntry.put("name_fc", "#ReadOnly");
+        result.add(modifiedEntry);
+    }
+    context.setResult(result);
+
     }
 
 }

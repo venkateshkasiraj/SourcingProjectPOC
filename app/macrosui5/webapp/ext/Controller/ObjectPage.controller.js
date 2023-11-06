@@ -65,6 +65,7 @@ sap.ui.define(
             },
 
             cancelDocument: async function (oEvent) {
+                debugger;
                 var oDraftContext = this.getView().getBindingContext(); // get the context of the draft ID
 
                 if (oDraftContext) {
