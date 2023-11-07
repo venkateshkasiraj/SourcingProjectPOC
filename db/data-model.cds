@@ -32,7 +32,7 @@ entity Phases : cuid {
 
  @Capabilities: { Readable:true, Insertable:true, Updatable:true, Deletable:true }
 entity SourcingProjectHeader : cuid, managed {
-            Name              : String(87) ;                        
+            Name              : String(87) @Common.FieldControl : name_fc;                        
             Description       : String;
             FullProject       : Boolean;
             TestProject       : Boolean;
@@ -60,5 +60,5 @@ entity SourcingProjectHeader : cuid, managed {
             EventType         : Association to one EventTypes
                                             on EventType.ID = EventType_ID;  
             
-            virtual name_fc : String(20)  default '#ReadOnly';                                            
+            virtual name_fc : String(20);                                            
 };
