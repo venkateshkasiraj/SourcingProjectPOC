@@ -32,7 +32,7 @@ entity Phases : cuid {
 
  @Capabilities: { Readable:true, Insertable:true, Updatable:true, Deletable:true }
 entity SourcingProjectHeader : cuid, managed {
-            Name              : String(87) @Common.FieldControl : name_fc;                        
+            Name              : String(87);                        
             Description       : String;
             FullProject       : Boolean;
             TestProject       : Boolean;

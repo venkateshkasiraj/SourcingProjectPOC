@@ -61,7 +61,7 @@ Result results = db.run(select);
 List<SourcingProjectHeader> resultList = results.listOf(SourcingProjectHeader.class);
 */
 for (SourcingProjectHeader header : resultList) {
-    header.setNameFc("#ReadOnly");
+    header.setNameFc("1");
 }
         //List<Map<String, Object>> result = new ArrayList<>();
    /* context.getModel().entities().forEach(e -> {
